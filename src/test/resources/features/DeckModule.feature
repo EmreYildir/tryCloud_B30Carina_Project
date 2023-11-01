@@ -6,9 +6,9 @@ Feature: Default
 	Scenario: US4AC1 - User can create a new board
 		Given user enters login and password
 		    When user clicks on Deck Module
-		    And then clicks on "Add Board"
-		    And writes a new name
-		    Then newly created board should be displayed under "All Boards"	
+		    And then clicks on Add Board
+		    And writes a "new name"
+		    Then newly created board should be displayed under All Boards
 
 	
 	@B30G11-126
@@ -17,7 +17,7 @@ Feature: Default
 		      When user clicks on Deck Module
 		      And user chooses a board name
 		      And clicks on Add List Button
-		      And writes a new list name
+		      And writes a "new list name"
 		      And hits enter on the keyboard
 		      Then new list should be displayed	
 
@@ -28,7 +28,7 @@ Feature: Default
 		        When user clicks on Deck Module
 		        And user chooses a board name
 		        And clicks Add card button
-		        And enters a new Card name
+		        And enters a "new Card name"
 		        Then new card should be displayed	
 
 	
