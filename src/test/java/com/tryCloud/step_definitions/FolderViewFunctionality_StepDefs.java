@@ -22,12 +22,17 @@ public class FolderViewFunctionality_StepDefs {
     DashboardPage dashboardPage = new DashboardPage();
     FilesPage filesPage = new FilesPage();
 
-    @Given("user enters login and password")
-    public void user_enters_login_and_password() {
-        loginPage.userName.sendKeys("User5");
-        loginPage.password.sendKeys("Userpass123");
-        loginPage.submit.click();
-    }
+   @Given("user enters login and password")
+   public void user_enters_login_and_password() {
+       loginPage.login("User5","Userpass123");
+
+
+   }
+//        loginPage.userName.sendKeys("User5");
+//        loginPage.password.sendKeys("Userpass123");
+//        loginPage.submit.click();
+//    }
+
 
     @Then("user clicks on files icon")
     public void user_clicks_on_files_icon() {
@@ -43,7 +48,7 @@ public class FolderViewFunctionality_StepDefs {
 
 
         List<String> actualListOfNames = new ArrayList<>();
-        for (WebElement each : filesPage.listOfNames) {
+        for (WebElement each : filesPage.listOfFoldersAndFiles) {
             actualListOfNames.add(each.getText());
 
         }
@@ -75,7 +80,7 @@ public class FolderViewFunctionality_StepDefs {
 //            System.out.println(actualListOfNames);
 //
 //        }
-        List<WebElement> items = filesPage.listOfNames;
+        List<WebElement> items = filesPage.listOfFoldersAndFiles;
 
         sizesBeforeSort = new ArrayList<>();
         sizesAfterSort = new ArrayList<>();

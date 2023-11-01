@@ -18,7 +18,7 @@ public class FilesPage {
     @FindBy(xpath = "//li[@data-id='trashbin']")
     public WebElement trashIcon;
     @FindBy(xpath = "//tr[@data-type='dir']")
-    public List<WebElement> listOfNames;
+    public List<WebElement> listOfFoldersAndFiles;
 
     @FindBy(xpath = "(//table[@id='filestable']//th/a[@data-sort='size'])[1]")
     public WebElement sizeIcon;
