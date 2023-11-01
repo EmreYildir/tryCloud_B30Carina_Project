@@ -4,13 +4,13 @@ import com.tryCloud.pages.DashboardPage;
 import com.tryCloud.pages.FilesPage;
 import com.tryCloud.pages.LoginPage;
 import com.tryCloud.utilities.BrowserUtils;
-import com.tryCloud.utilities.Driver;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,12 +88,12 @@ public class FolderViewFunctionality_StepDefs {
         }
        System.out.println("hello");
         // Store the sizes and check if they're sorted
-//        sizesAfterSort.addAll(sizesBeforeSort);
-//        Collections.sort(sizesAfterSort);
+        sizesAfterSort.addAll(sizesBeforeSort);
+        Collections.sort(sizesAfterSort);
 
 
         // Assert that the sizes are sorted
-        //  Assert.assertEquals("List is not sorted by size", sizesBeforeSort.equals(sizesAfterSort));
+          Assert.assertEquals(sizesAfterSort,sizesBeforeSort);
     }
 }
 
