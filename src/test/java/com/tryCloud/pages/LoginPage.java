@@ -12,7 +12,7 @@ public class LoginPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(id="username")
+    @FindBy(id="user")
     public WebElement userName;
 
     @FindBy(id="password")
