@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class FilesPage {
 
     public FilesPage(){
@@ -15,4 +17,10 @@ public class FilesPage {
 
     @FindBy(xpath = "//li[@data-id='trashbin']")
     public WebElement trashIcon;
+    @FindBy(xpath = "//tr[@data-type='dir']")
+    public List<WebElement> listOfNames;
+
+    @FindBy(xpath = "(//table[@id='filestable']//th/a[@data-sort='size'])[1]")
+    public WebElement sizeIcon;
+
 }
