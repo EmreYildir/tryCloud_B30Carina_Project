@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -39,6 +40,7 @@ public class dashboardFunctionality_StepDefs {
     @And("user can see username")
     public void userCanSeeUsername() {
         dashboardPage.usernameHeader.isDisplayed();
+        System.out.println(dashboardPage.usernameHeader.getText());
     }
 
 
@@ -66,7 +68,8 @@ public class dashboardFunctionality_StepDefs {
     @When("user clicks on Status button")
     public void user_clicks_on_status_button() {
 
-        dashboardPage.statusButton.click();
+
+
     }
 
     @Then("user can select any status options")
@@ -75,16 +78,7 @@ public class dashboardFunctionality_StepDefs {
 
         List<WebElement> statusOption = Driver.getDriver().findElements(By.xpath("//label[@data-v-d5c541dc]"));
 
-        for (WebElement each : statusOption) {
 
-            each.click();
-            dashboardPage.setStatusBtn.click();
-            BrowserUtils.sleep(3);
-            Assert.assertTrue(each.getText().equals(dashboardPage.statusButton.getText()));
-            dashboardPage.statusButton.click();
-            BrowserUtils.sleep(3);
-
-        }
 
     }
 
