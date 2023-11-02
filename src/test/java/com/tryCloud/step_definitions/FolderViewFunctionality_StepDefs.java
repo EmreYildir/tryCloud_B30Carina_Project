@@ -25,8 +25,6 @@ public class FolderViewFunctionality_StepDefs {
    @Given("user enters login and password")
    public void user_enters_login_and_password() {
        loginPage.login("User5","Userpass123");
-
-
    }
 //        loginPage.userName.sendKeys("User5");
 //        loginPage.password.sendKeys("Userpass123");
@@ -49,9 +47,9 @@ public class FolderViewFunctionality_StepDefs {
 
         List<String> actualListOfNames = new ArrayList<>();
         for (WebElement each : filesPage.listOfFoldersAndFiles) {
-            actualListOfNames.add(each.getText());
-
+            actualListOfNames.add(each.getAttribute("data-file"));
         }
+
         System.out.println(actualListOfNames);
         Collections.sort(actualListOfNames);
         System.out.println(actualListOfNames);
