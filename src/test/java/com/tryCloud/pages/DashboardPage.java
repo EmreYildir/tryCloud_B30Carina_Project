@@ -25,17 +25,7 @@ public class DashboardPage {
     @FindBy(xpath = "//li[@data-v-d8d86ca2]")
     public WebElement widgetBoxes;
 
-    @FindBy(xpath = "//button")
-    public WebElement statusButton;
 
-    @FindBy(xpath = "//div[@class='user-status-online-select']")
-    public WebElement statusOptions;
-
-    @FindBy(xpath = "//button[@class='status-buttons__primary primary']")
-    public WebElement setStatusBtn;
-
-    @FindBy(xpath = "//div[@class='avatardiv avatardiv-shown']")
-    public WebElement avatarIcon;
 
 
 
