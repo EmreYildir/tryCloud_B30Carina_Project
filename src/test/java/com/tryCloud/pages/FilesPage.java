@@ -26,4 +26,19 @@ public class FilesPage {
     @FindBy(xpath = "(//table[@id='filestable']//th/a[@data-sort='size'])[1]")
     public WebElement sizeIcon;
 
+
+
+    // WebElements Kati userStory
+
+    @FindBy(xpath="//*[@id='controls']/div[2]/a")
+    public WebElement plusBtn;
+
+    @FindBy(xpath="//*[@id='controls']/div[2]/div[2]/ul")
+    public WebElement dropDown;
+
+    @FindBy(xpath="//span[text()='Upload file']")
+    public WebElement uploadFileBtn;
+
+
+
 }

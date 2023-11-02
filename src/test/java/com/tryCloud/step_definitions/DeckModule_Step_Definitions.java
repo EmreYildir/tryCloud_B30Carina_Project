@@ -10,11 +10,11 @@ public class DeckModule_Step_Definitions {
     LoginPage loginPage = new LoginPage();
 
 
-    @Given("user enters login and password")
-    public void user_enters_login_and_password() {
+  //  @Given("user enters login and password")
+  //  public void user_enters_login_and_password() {
 
 
-    }
+ //   }
     @When("user clicks on Deck Module")
     public void user_clicks_on_deck_module() {
 
