@@ -13,20 +13,20 @@ public class DeckModulePage {
     }
 
 
-    @FindBy()
-    public WebElement k;
+    @FindBy(xpath = "//a[@aria-label='Deck'][1]")
+    public WebElement deckButton;
 
-    @FindBy()
-    public WebElement g;
+    @FindBy(xpath = "//a[@class='F']")
+    public WebElement addBoardButton;
 
-    @FindBy()
-    public WebElement a;
+    @FindBy(xpath = "//input[@placeholder='Board name']")
+    public WebElement boardNameInput;
 
-    @FindBy()
-    public WebElement b;
+    @FindBy(xpath = "(//input[@type='submit'])[2]")
+    public WebElement boardNameArrow;
 
-    @FindBy()
-    public WebElement c;
+    @FindBy(xpath = "//span[@title='new name']")
+    public WebElement newNameBoard;
 
     @FindBy()
     public WebElement d;
