@@ -12,11 +12,14 @@ public class FilesPage {
     public FilesPage(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
+
+
     @FindBy(xpath = "//li[@data-id='files']")
     public WebElement filesIcon;
 
     @FindBy(xpath = "//li[@data-id='trashbin']")
     public WebElement trashIcon;
+
     @FindBy(xpath = "//tr[@data-type='dir']")
     public List<WebElement> listOfNames;
 
