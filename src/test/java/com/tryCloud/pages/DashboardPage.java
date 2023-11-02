@@ -34,6 +34,9 @@ public class DashboardPage {
     @FindBy(xpath = "//button[@class='status-buttons__primary primary']")
     public WebElement setStatusBtn;
 
+    @FindBy(xpath = "//div[@class='avatardiv avatardiv-shown']")
+    public WebElement avatarIcon;
+
 
 
 }
