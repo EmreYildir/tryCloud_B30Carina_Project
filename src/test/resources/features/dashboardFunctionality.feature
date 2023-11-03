@@ -16,7 +16,13 @@ Feature: Default
 			|Circles|
 			|Calendar|
 			|Deck|
-		And user can see username
+
+
+	@B30G11-150
+	Scenario: US001-AC1 - Verify user can see username after login
+		Given user login with correct "username" and "password"
+		Then user can see username
+
 
 
 	@B30G11-134
@@ -24,6 +30,15 @@ Feature: Default
 		Given user login with correct "username" and "password"
 		When user clicks on Customize button
 		Then user can select any of the Widgets
+			|Online|
+			|Set location for weather|
+			|Upcoming events|
+			|Upcoming cards|
+			|Important mail|
+			|Unread mail|
+			|Recommended files|
+			|Talk mentions|
+			|Recent statuses|
 
 
 	@B30G11-135
