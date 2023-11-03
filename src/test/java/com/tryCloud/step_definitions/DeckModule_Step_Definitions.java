@@ -1,113 +1,139 @@
 package com.tryCloud.step_definitions;
 
 import com.tryCloud.pages.DeckModulePage;
+import com.tryCloud.pages.FilesPage;
 import com.tryCloud.pages.LoginPage;
+import com.tryCloud.utilities.BrowserUtils;
+import com.tryCloud.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.bytebuddy.asm.Advice;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeckModule_Step_Definitions {
     LoginPage loginPage = new LoginPage();
+
+
     DeckModulePage deckModulePage = new DeckModulePage();
-
-
-   /* @Given("user enters login and password")
-    public void user_enters_login_and_password() {
-        loginPage.userName.sendKeys("User33");
-        loginPage.password.sendKeys("Userpass123");
-        loginPage.submit.click();
-        }
-
-    */
 
 
     @When("user clicks on Deck Module")
     public void user_clicks_on_deck_module() {
-       deckModulePage.deckButton.click();
+
+
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(deckModulePage.deckButton);
+        deckModulePage.deckButton.click();
 
 
     }
     @And("then clicks on Add Board")
     public void thenClicksOnAddBoard() {
+        deckModulePage.threeDashesMenu.click();
+        BrowserUtils.sleep(3);
         deckModulePage.addBoardButton.click();
     }
 
     @And("writes a {string}")
     public void writesA(String newBoardName) {
-
-        deckModulePage.boardNameInput.sendKeys(newBoardName);
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        deckModulePage.addBoardButton.sendKeys(newBoardName);
+        BrowserUtils.sleep(3);
         deckModulePage.boardNameArrow.click();
+        deckModulePage.chooseBoardNameInput.isDisplayed();
     }
 
     @Then("newly created board should be displayed under All Boards")
     public void newlyCreatedBoardShouldBeDisplayedUnderAllBoards() {
-        deckModulePage.newNameBoard.isDisplayed();
-    }
-
-
-    @When("user chooses a board name")
-    public void user_chooses_a_board_name() {
-
+        BrowserUtils.sleep(5);
 
     }
 
 
+    @And("user chooses a board name")
+    public void userChoosesABoardName() {
+        deckModulePage.threeDashesMenu.click();
+        List<String> actualListOfBoards = new ArrayList<>();
+        for (WebElement each : deckModulePage.listOfAllBoards) {
+            actualListOfBoards.add(each.getText());
+            if (each.getText().equals("new name")){
+                each.click();
+                break;
+
+            }
 
 
-    @When("clicks on Add List Button")
-    public void clicks_on_add_list_button() {
+        }
+
+
 
     }
-    @When("writes a new list name")
-    public void writes_a_new_list_name() {
 
+    @And("clicks on Add List Button")
+    public void clicksOnAddListButton() {
+        BrowserUtils.sleep(5);
+        deckModulePage.addListButton.click();
     }
-    @When("hits enter on the keyboard")
-    public void hits_enter_on_the_keyboard() {
 
+    @And("types a {string}")
+    public void typesA(String listName) {
+        deckModulePage.listNameInput.sendKeys(listName);
     }
+
+    @And("hits enter on the keyboard")
+    public void hitsEnterOnTheKeyboard() {
+        deckModulePage.listNameInput.sendKeys(Keys.ENTER);
+    }
+
     @Then("new list should be displayed")
-    public void new_list_should_be_displayed() {
-
+    public void newListShouldBeDisplayed() {
+        deckModulePage.newList.isDisplayed();
     }
 
-
-
-    @When("clicks Add card button")
-    public void clicks_add_card_button() {
-
-
+    @And("clicks Add card button")
+    public void clicksAddCardButton() {
+        deckModulePage.addCardButton.click();
     }
+
     @And("enters a {string}")
-    public void entersA(String arg0) {
+    public void entersA(String newCardName) {
+        deckModulePage.cardNameInput.sendKeys(newCardName);
     }
-
 
     @Then("new card should be displayed")
-    public void new_card_should_be_displayed() {
-
+    public void newCardShouldBeDisplayed() {
+        deckModulePage.cardNamePopUpLeft.isDisplayed();
+        deckModulePage.cardNameSideBarRight.isDisplayed();
     }
 
     @And("clicks on the three dots on the {string}")
     public void clicksOnTheThreeDotsOnThe(String arg0) {
+        deckModulePage.threeDots.click();
     }
-
 
     @And("clicks on Assign to me button")
-    public void clicks_on_assign_to_me_button() {
-
+    public void clicksOnAssignToMeButton() {
+        deckModulePage.assignToMeButton.click();
     }
+
     @Then("user profile icon should be displayed near the three dots icon")
-    public void user_profile_icon_should_be_displayed_near_the_three_dots_icon() {
-
+    public void userProfileIconShouldBeDisplayedNearTheThreeDotsIcon() {
+        deckModulePage.userProfileIcon.isDisplayed();
     }
 
-
-
-
-
-
-
-
+    @Given("the user is logged in")
+    public void theUserIsLoggedIn() {
+        loginPage.userName.sendKeys("User1");
+        loginPage.password.sendKeys("Userpass123");
+        loginPage.submit.click();
+    }
 }
