@@ -49,6 +49,8 @@ public class DeckModule_Step_Definitions {
         deckModulePage.addBoardButton.sendKeys(newBoardName);
         BrowserUtils.sleep(3);
         deckModulePage.boardNameArrow.click();
+
+        //not sure if this is really verified. test passed
         deckModulePage.chooseBoardNameInput.isDisplayed();
     }
 
@@ -62,6 +64,8 @@ public class DeckModule_Step_Definitions {
     @And("user chooses a board name")
     public void userChoosesABoardName() {
         deckModulePage.threeDashesMenu.click();
+
+        // not sure about this loop also
         List<String> actualListOfBoards = new ArrayList<>();
         for (WebElement each : deckModulePage.listOfAllBoards) {
             actualListOfBoards.add(each.getText());
