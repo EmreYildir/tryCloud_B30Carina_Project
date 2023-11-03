@@ -18,9 +18,24 @@ public class FilesPage {
     @FindBy(xpath = "//li[@data-id='trashbin']")
     public WebElement trashIcon;
     @FindBy(xpath = "//tr[@data-type='dir']")
-    public List<WebElement> listOfNames;
+    public List<WebElement> listOfFoldersAndFiles;
+
+    @FindBy(xpath = "//td[@class='date']/span")
+    public List<WebElement> listOfFoldersAndFilesWithDate;
+
+    @FindBy(xpath = "(//a[@data-sort='name'])[1]")
+    public WebElement nameIcon;
 
     @FindBy(xpath = "(//table[@id='filestable']//th/a[@data-sort='size'])[1]")
     public WebElement sizeIcon;
+
+    @FindBy(id = "modified")
+    public WebElement modifiedIcon;
+
+    @FindBy(xpath = "//label[@for='select_all_files']")
+    public WebElement buttonSelectAllFiles;
+
+    @FindBy(xpath = "//td/input[@type='checkbox']")
+    public List<WebElement> listOfCheckBoxes;
 
 }
