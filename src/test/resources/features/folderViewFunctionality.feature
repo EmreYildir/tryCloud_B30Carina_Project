@@ -3,7 +3,7 @@ Feature: Default
 
 
   @B30G11-117
-  Scenario: User can change folder view order by Name.
+  Scenario: User can change folder view order by Name
     Given user enters login and password
     Then user clicks on files icon
     Then user can change folder view order by Name by clicking on it
@@ -20,7 +20,7 @@ Feature: Default
   Scenario: User can change folder view order by Modified button
     Given user enters login and password
     Then user clicks on files icon
-#    Then user can change folder view order by Modified by clicking on icon Modified
+    Then user can change folder view order by Modified by clicking on icon Modified
 
 	#User can select all the files at once and see the total values of all
 	#files in the first line when clicked on the “select all” checkbox at the left
@@ -29,4 +29,4 @@ Feature: Default
   Scenario: User can select all the files at once and see the total values of all
     Given user enters login and password
     Then user clicks on files icon
-#    When User can select all the files by clicking select all
+    When User can select all the files by clicking select all
