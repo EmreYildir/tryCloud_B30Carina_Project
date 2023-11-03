@@ -20,7 +20,16 @@ public class FilesPage {
     @FindBy(xpath = "//tr[@data-type='dir']")
     public List<WebElement> listOfFoldersAndFiles;
 
+    @FindBy(xpath = "//td[@class='date']/span")
+    public List<WebElement> listOfFoldersAndFilesWithDate;
+
+    @FindBy(xpath = "(//a[@data-sort='name'])[1]")
+    public WebElement nameIcon;
+
     @FindBy(xpath = "(//table[@id='filestable']//th/a[@data-sort='size'])[1]")
     public WebElement sizeIcon;
+
+    @FindBy(id = "modified")
+    public WebElement modifiedIcon;
 
 }
