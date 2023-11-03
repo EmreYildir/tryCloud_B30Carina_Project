@@ -15,4 +15,24 @@ public class FilesPage {
 
     @FindBy(xpath = "//li[@data-id='trashbin']")
     public WebElement trashIcon;
+
+    @FindBy(xpath = "//span[@class='sort-indicator icon-triangle-s']")
+    public WebElement deletedIcon;
+
+    @FindBy(xpath = "//a[@class='action action-menu permanent']")
+    public WebElement threeDots; //no such element
+
+    @FindBy(xpath = "//a[@class='action action-restore permanent']")
+    public WebElement restoreButton;
+
+    @FindBy(xpath = "//a[@class='nav-icon-files svg active']")
+    public WebElement allFilesTab; //no such element
+
+
+
+    public void accessDeletedFilesTab(){
+        FilesPage page = new FilesPage();
+        page.filesIcon.click();
+        page.trashIcon.click();
+    }
 }
