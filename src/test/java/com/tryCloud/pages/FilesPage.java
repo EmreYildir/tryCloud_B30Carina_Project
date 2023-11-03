@@ -32,4 +32,10 @@ public class FilesPage {
     @FindBy(id = "modified")
     public WebElement modifiedIcon;
 
+    @FindBy(xpath = "//label[@for='select_all_files']")
+    public WebElement buttonSelectAllFiles;
+
+    @FindBy(xpath = "//td/input[@type='checkbox']")
+    public List<WebElement> listOfCheckBoxes;
+
 }

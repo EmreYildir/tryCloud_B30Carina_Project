@@ -5,10 +5,12 @@ import com.tryCloud.pages.FilesPage;
 import com.tryCloud.pages.LoginPage;
 import com.tryCloud.utilities.BrowserUtils;
 
+import java.sql.ClientInfoStatus;
 import java.text.ParseException;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 
 import java.util.ArrayList;
@@ -42,7 +45,6 @@ public class FolderViewFunctionality_StepDefs {
     @Then("user can change folder view order by Name by clicking on it")
     public void user_can_change_folder_view_order_by_name_by_clicking_on_it() {
         filesPage.nameIcon.click();
-
         List<String> actualListOfNames = new ArrayList<>();
         List<String> expectedListOfNames = new ArrayList<>();
         for (WebElement each : filesPage.listOfFoldersAndFiles) {
@@ -55,37 +57,20 @@ public class FolderViewFunctionality_StepDefs {
 
     @Then("user can change folder view order by Size by clicking on icon Size")
     public void userCanChangeFolderViewOrderBySizeByClickingOnIconSize() {
-        BrowserUtils.sleep(2);
-      filesPage.sizeIcon.click();
-        BrowserUtils.sleep(2);
-
-//        filesPage.sizeIcon.click();
-//        BrowserUtils.sleep(2);
-//        filesPage.sizeIcon.click();
-//        BrowserUtils.sleep(2);
-
+        BrowserUtils.sleep(1);
+        filesPage.sizeIcon.click();
         List<String> sizesBeforeSort = new ArrayList<>();
         List<String> sizesAfterSort = new ArrayList<>();
 
-//        for (WebElement each : filesPage.listOfFoldersAndFiles) {
-//            List<String> actualListOfNames = new ArrayList<>();
-//            actualListOfNames.add(each.getAttribute("size"));
-//            System.out.println(actualListOfNames);
-//        }
         List<WebElement> items = filesPage.listOfFoldersAndFiles;
         for (WebElement each : items) {
             sizesBeforeSort.add(each.getAttribute("data-size"));
             sizesAfterSort.add(each.getAttribute("data-size"));
         }
-        System.out.println("by size");
-        // Store the sizes and check if they're sorted
-        //  sizesAfterSort.addAll(sizesBeforeSort);
-        System.out.println(sizesAfterSort);
-        System.out.println(sizesBeforeSort);
+
         Collections.sort(sizesAfterSort);
+        Collections.reverse(sizesAfterSort);
 
-
-        // Assert that the sizes are sorted
         Assert.assertEquals(sizesAfterSort, sizesBeforeSort);
     }
 
@@ -94,17 +79,12 @@ public class FolderViewFunctionality_StepDefs {
         BrowserUtils.sleep(2);
         filesPage.modifiedIcon.click();
 
-        List<String> modifiedBeforeSort;
-        List<String> modifiedAfterSort;
-        modifiedBeforeSort = new ArrayList<>();
-        modifiedAfterSort = new ArrayList<>();
-        List<WebElement> items = filesPage.listOfFoldersAndFilesWithDate;
-        for (WebElement each : items) {
+        List<String> modifiedBeforeSort = new ArrayList<>();
+        List<String> modifiedAfterSort = new ArrayList<>();
+        for (WebElement each : filesPage.listOfFoldersAndFilesWithDate) {
             modifiedBeforeSort.add(each.getAttribute("data-original-title"));
             modifiedAfterSort.add(each.getAttribute("data-original-title"));
-
         }
-        System.out.println("hello");
 
         Collections.sort(modifiedAfterSort);
         Comparator<String> dateComparator = new Comparator<String>() {
@@ -123,11 +103,17 @@ public class FolderViewFunctionality_StepDefs {
             }
         };
         Collections.sort(modifiedAfterSort, dateComparator);
+        Collections.reverse(modifiedAfterSort);
         Assert.assertEquals(modifiedAfterSort, modifiedBeforeSort);
-        System.out.println(modifiedAfterSort);
-        System.out.println(modifiedBeforeSort);
+    }
 
-
+    @When("User can select all the files by clicking select all")
+    public void userCanSelectAllTheFilesByClickingSelectAll() {
+        BrowserUtils.sleep(1);
+        filesPage.buttonSelectAllFiles.click();
+        for (WebElement each : filesPage.listOfCheckBoxes) {
+            Assert.assertTrue("It's not selected", each.isSelected());
+        }
     }
 }
 

@@ -25,8 +25,8 @@ Feature: Default
 	#User can select all the files at once and see the total values of all
 	#files in the first line when clicked on the “select all” checkbox at the left
 	#top corner of the list.
-#  @B30G11-121
-#  Scenario: User can select all the files at once and see the total values of all
-#    Given user enters login and password
-#    Then user clicks on files icon
-#    When User can select all the files by clicking select all
+  @B30G11-121
+  Scenario: User can select all the files at once and see the total values of all
+    Given user enters login and password
+    Then user clicks on files icon
+    When User can select all the files by clicking select all
