@@ -38,6 +38,8 @@ Feature: Default
 		Given the user is logged in
 		        When user clicks on Deck Module
 		        And user chooses a board name
-		        And clicks on the three dots on the "new Card"
+				And clicks Add card button
+				And enters a "new Card name"
+		        And clicks on the three dots on the current Card
 		        And clicks on Assign to me button
 		        Then user profile icon should be displayed near the three dots icon

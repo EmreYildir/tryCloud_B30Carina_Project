@@ -10,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.bytebuddy.asm.Advice;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,11 +21,7 @@ import java.util.List;
 
 public class DeckModule_Step_Definitions {
     LoginPage loginPage = new LoginPage();
-
-
     DeckModulePage deckModulePage = new DeckModulePage();
-
-
     @When("user clicks on Deck Module")
     public void user_clicks_on_deck_module() {
 
@@ -46,11 +43,11 @@ public class DeckModule_Step_Definitions {
     @And("writes a {string}")
     public void writesA(String newBoardName) {
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        deckModulePage.addBoardButton.sendKeys(newBoardName);
+        deckModulePage.boardName.sendKeys(newBoardName);
         BrowserUtils.sleep(3);
         deckModulePage.boardNameArrow.click();
 
-        //not sure if this is really verified. test passed
+
         deckModulePage.chooseBoardNameInput.isDisplayed();
     }
 
@@ -65,7 +62,7 @@ public class DeckModule_Step_Definitions {
     public void userChoosesABoardName() {
         deckModulePage.threeDashesMenu.click();
 
-        // not sure about this loop also
+
         List<String> actualListOfBoards = new ArrayList<>();
         for (WebElement each : deckModulePage.listOfAllBoards) {
             actualListOfBoards.add(each.getText());
@@ -90,12 +87,12 @@ public class DeckModule_Step_Definitions {
 
     @And("types a {string}")
     public void typesA(String listName) {
-        deckModulePage.listNameInput.sendKeys(listName);
+        deckModulePage.listNameInput.sendKeys(listName + Keys.ENTER);
     }
 
     @And("hits enter on the keyboard")
     public void hitsEnterOnTheKeyboard() {
-        deckModulePage.listNameInput.sendKeys(Keys.ENTER);
+      //  deckModulePage.listNameInput.sendKeys(Keys.ENTER);
     }
 
     @Then("new list should be displayed")
@@ -110,7 +107,7 @@ public class DeckModule_Step_Definitions {
 
     @And("enters a {string}")
     public void entersA(String newCardName) {
-        deckModulePage.cardNameInput.sendKeys(newCardName);
+        deckModulePage.cardNameInput.sendKeys(newCardName + Keys.ENTER);
     }
 
     @Then("new card should be displayed")
@@ -118,26 +115,33 @@ public class DeckModule_Step_Definitions {
         deckModulePage.cardNamePopUpLeft.isDisplayed();
         deckModulePage.cardNameSideBarRight.isDisplayed();
     }
-
-    @And("clicks on the three dots on the {string}")
-    public void clicksOnTheThreeDotsOnThe(String arg0) {
+    @And("clicks on the three dots on the current Card")
+    public void clicksOnTheThreeDotsOnTheCurrentCard() {
+        BrowserUtils.sleep(5);
+        deckModulePage.currentCard.click();
+        BrowserUtils.sleep(5);
         deckModulePage.threeDots.click();
     }
 
+
     @And("clicks on Assign to me button")
     public void clicksOnAssignToMeButton() {
+        BrowserUtils.sleep(5);
         deckModulePage.assignToMeButton.click();
     }
 
     @Then("user profile icon should be displayed near the three dots icon")
     public void userProfileIconShouldBeDisplayedNearTheThreeDotsIcon() {
+        BrowserUtils.sleep(5);
         deckModulePage.userProfileIcon.isDisplayed();
     }
 
     @Given("the user is logged in")
     public void theUserIsLoggedIn() {
-        loginPage.userName.sendKeys("User1");
+        loginPage.userName.sendKeys("User10");
         loginPage.password.sendKeys("Userpass123");
         loginPage.submit.click();
     }
+
+
 }
