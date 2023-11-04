@@ -68,7 +68,7 @@ public class DeckModulePage {
     @FindBy(xpath = "//a[@class='app-navigation-toggle']")
     public WebElement threeDashesMenu;
 
-    ////div[@style='width: 32px; height: 32px; line-height: 32px; font-size: 18px;']
+
 
 
 
