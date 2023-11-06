@@ -2,6 +2,7 @@ package com.tryCloud.step_definitions;
 
 import com.tryCloud.pages.FilesPage;
 import com.tryCloud.pages.LoginPage;
+import com.tryCloud.utilities.BrowserUtils;
 import com.tryCloud.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,6 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class restoreFiles_stepDefinitions {
 
@@ -24,7 +28,7 @@ public class restoreFiles_stepDefinitions {
     @Given("user is on the deleted files tab")
     public void user_is_on_the_deleted_files_tab() {
         Driver.getDriver().get("https://qa.trycloud.net/");
-        loginPage.login("User2", "Userpass123"); //login to website
+        loginPage.login("User44", "Userpass123"); //login to website
         filesPage.filesIcon.click(); //click on files icon
     }
     @When("user clicks to the deleted icon")
@@ -50,22 +54,58 @@ public class restoreFiles_stepDefinitions {
           //assert that is sorted from newest to oldest
           //user clicks to "deleted" button
 
-        filesPage.modifiedIcon.click();
+
         }
     }
+    List<Long> datesOfDeleted= new ArrayList<>();
     @Then("files sort from oldest to newest")
     public void files_sort_from_oldest_to_newest() {
-    //assert that is sorted from oldest to newest
-        throw new io.cucumber.java.PendingException();
+        /* String firstId = filesPage.firstFile.getAttribute("id");
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        actions.click(filesPage.modifiedIcon).perform();
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        String newId = filesPage.firstFile.getAttribute("id");
+       Assert.assertTrue(! (firstId.equals(newId)) ); */
+        datesOfDeleted= new ArrayList<>();
+        for (WebElement each : filesPage.allDeletedFilesDate) {
+
+            System.out.println("each = " + each.getAttribute("data-mtime"));
+            datesOfDeleted.add(   Long.parseLong( each.getAttribute("data-mtime") ) ) ;
+            List<Long> sorted = new ArrayList<>( datesOfDeleted);
+            Collections.sort(sorted);
+            Assert.assertEquals(datesOfDeleted, sorted);
+        }
+
+
     }
     @When("user clicks to the deleted icon, again")
     public void user_clicks_to_the_deleted_icon_again() {
-        filesPage.modifiedIcon.click();
+        BrowserUtils.doubleClick(filesPage.Deleted_Ordering);
+        BrowserUtils.waitFor(5);
     }
+
+    @Then("user should see the order from newest the oldest")
+    public void userShouldSeeTheOrderFromNewestTheOldest() {
+
+        List<Long> datesOfDeletedAfterClick=new ArrayList<>();
+
+        for (WebElement each : filesPage.allDeletedFilesDate) {
+            BrowserUtils.waitForVisibility((WebElement) filesPage.allDeletedFilesDate,10);
+            datesOfDeletedAfterClick.add(Long.parseLong( each.getAttribute("data-mtime")));
+
+        }
+
+        Collections.reverse(datesOfDeleted);
+
+        Assert.assertEquals(datesOfDeleted,datesOfDeletedAfterClick);
+
+    }
+
+
     @Then("files sort from newest to oldest")
     public void files_sort_from_newest_to_oldest() {
     //assert that is sorted from newest to oldest
-        throw new io.cucumber.java.PendingException();
+
     }
 
     //ACCEPTANCE CRITERIA 2
@@ -99,20 +139,21 @@ public class restoreFiles_stepDefinitions {
 
 
     //ACCEPTANCE CRITERIA 3
+    int fileSize = filesPage.listOfFoldersAndFiles.size(); //get number of files in the "all files" page in order to assert later on
     @When("user presses restore on selected file")
     public void user_presses_restore_on_selected_file() {
         filesPage.trashIcon.click();
+        filesPage.restoreIcon.click();
 
     }
     @Then("file is restored")
     public void file_is_restored() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        //file disappears from "deleted files" tab
     }
     @Then("it is displayed under the All Files tab")
     public void it_is_displayed_under_the_all_files_tab() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        int newSize = filesPage.listOfFoldersAndFiles.size();
+        Assert.assertTrue(newSize != fileSize); //assert there is more files in the "all files" tab after it is restored
     }
 
 
