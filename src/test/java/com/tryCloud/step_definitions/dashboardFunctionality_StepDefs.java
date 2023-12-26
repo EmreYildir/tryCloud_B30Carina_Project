@@ -15,6 +15,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -26,6 +27,7 @@ public class dashboardFunctionality_StepDefs extends BasePage {
 
     LoginPage loginPage = new LoginPage();
     DashboardPage dashboardPage = new DashboardPage();
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
     @Given("user login with correct {string} and {string}")
     public void user_login_with_correct_username_and_password(String string, String string2) {
@@ -34,6 +36,7 @@ public class dashboardFunctionality_StepDefs extends BasePage {
 
     @Then("user can see all modules below list")
     public void user_can_see_all_modules_below_list(List<String> expectedDashModules) {
+
 
         List<String> actualDashModuleslist = new ArrayList<>();
         for (int i = 0; i < dashboardPage.dashBarModulesList.size() - 1; i++) {
@@ -79,6 +82,7 @@ public class dashboardFunctionality_StepDefs extends BasePage {
             actualWidget.add(element.getText());
         }
 
+
         Assert.assertEquals(expectedWidget,actualWidget);
 
 
@@ -113,7 +117,7 @@ public class dashboardFunctionality_StepDefs extends BasePage {
         for (WebElement each : dashboardPage.widgetBoxes) {
 
             each.click();
-            BrowserUtils.sleep(1);
+            wait.until(ExpectedConditions.elementToBeClickable(each));
         }
 
 
